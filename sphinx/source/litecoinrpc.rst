@@ -1,7 +1,7 @@
-:mod:`litecoinrpc` --- Convenience functions
+:mod:`theholyrogerrpc` --- Convenience functions
 ====================================================================================
 
-.. automodule:: litecoinrpc
+.. automodule:: theholyrogerrpc
    :members:
    :show-inheritance:
       

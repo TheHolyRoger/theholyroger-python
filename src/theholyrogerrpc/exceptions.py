@@ -22,11 +22,11 @@ Exception definitions.
 """
 
 
-class LitecoinException(Exception):
+class TheHolyRogerException(Exception):
     """
-    Base class for exceptions received from Litecoin server.
+    Base class for exceptions received fromThe Holy Rogerserver.
 
-    - *code* -- Error code from ``litecoind``.
+    - *code* -- Error code from ``theholyrogerd``.
     """
     # Standard JSON-RPC 2.0 errors
     INVALID_REQUEST  = -32600,
@@ -46,7 +46,7 @@ class LitecoinException(Exception):
     DESERIALIZATION_ERROR       = -22 # Error parsing or validating structure in raw format
 
     # P2P client errors
-    CLIENT_NOT_CONNECTED        = -9  # Litecoin is not connected
+    CLIENT_NOT_CONNECTED        = -9  #The Holy Rogeris not connected
     CLIENT_IN_INITIAL_DOWNLOAD  = -10 # Still downloading initial blocks
 
     # Wallet errors
@@ -83,40 +83,40 @@ class TransportException(Exception):
        return self.s
 
 ##### General application defined errors
-class SafeMode(LitecoinException):
+class SafeMode(TheHolyRogerException):
     """
-    Operation denied in safe mode (run ``litecoind`` with ``-disablesafemode``).
+    Operation denied in safe mode (run ``theholyrogerd`` with ``-disablesafemode``).
     """
 
 
-class JSONTypeError(LitecoinException):
+class JSONTypeError(TheHolyRogerException):
     """
     Unexpected type was passed as parameter
     """
 InvalidAmount = JSONTypeError  # Backwards compatibility
 
 
-class InvalidAddressOrKey(LitecoinException):
+class InvalidAddressOrKey(TheHolyRogerException):
     """
     Invalid address or key.
     """
 InvalidTransactionID = InvalidAddressOrKey  # Backwards compatibility
 
 
-class OutOfMemory(LitecoinException):
+class OutOfMemory(TheHolyRogerException):
     """
     Out of memory during operation.
     """
 
 
-class InvalidParameter(LitecoinException):
+class InvalidParameter(TheHolyRogerException):
     """
     Invalid parameter provided to RPC call.
     """
 
 
 ##### Client errors
-class ClientException(LitecoinException):
+class ClientException(TheHolyRogerException):
     """
     P2P network error.
     This exception is never raised but functions as a superclass
@@ -137,7 +137,7 @@ class DownloadingBlocks(ClientException):
 
 
 ##### Wallet errors
-class WalletError(LitecoinException):
+class WalletError(TheHolyRogerException):
     """
     Unspecified problem with wallet (key not found etc.)
     """
@@ -193,28 +193,28 @@ class WalletAlreadyUnlocked(WalletError):
 # For convenience, we define more specific exception classes
 # for the more common errors.
 _exception_map = {
-    LitecoinException.FORBIDDEN_BY_SAFE_MODE: SafeMode,
-    LitecoinException.TYPE_ERROR: JSONTypeError,
-    LitecoinException.WALLET_ERROR: WalletError,
-    LitecoinException.INVALID_ADDRESS_OR_KEY: InvalidAddressOrKey,
-    LitecoinException.WALLET_INSUFFICIENT_FUNDS: InsufficientFunds,
-    LitecoinException.OUT_OF_MEMORY: OutOfMemory,
-    LitecoinException.INVALID_PARAMETER: InvalidParameter,
-    LitecoinException.CLIENT_NOT_CONNECTED: NotConnected,
-    LitecoinException.CLIENT_IN_INITIAL_DOWNLOAD: DownloadingBlocks,
-    LitecoinException.WALLET_INSUFFICIENT_FUNDS: InsufficientFunds,
-    LitecoinException.WALLET_INVALID_ACCOUNT_NAME: InvalidAccountName,
-    LitecoinException.WALLET_KEYPOOL_RAN_OUT: KeypoolRanOut,
-    LitecoinException.WALLET_UNLOCK_NEEDED: WalletUnlockNeeded,
-    LitecoinException.WALLET_PASSPHRASE_INCORRECT: WalletPassphraseIncorrect,
-    LitecoinException.WALLET_WRONG_ENC_STATE: WalletWrongEncState,
-    LitecoinException.WALLET_ENCRYPTION_FAILED: WalletEncryptionFailed,
-    LitecoinException.WALLET_ALREADY_UNLOCKED: WalletAlreadyUnlocked,
+    TheHolyRogerException.FORBIDDEN_BY_SAFE_MODE: SafeMode,
+    TheHolyRogerException.TYPE_ERROR: JSONTypeError,
+    TheHolyRogerException.WALLET_ERROR: WalletError,
+    TheHolyRogerException.INVALID_ADDRESS_OR_KEY: InvalidAddressOrKey,
+    TheHolyRogerException.WALLET_INSUFFICIENT_FUNDS: InsufficientFunds,
+    TheHolyRogerException.OUT_OF_MEMORY: OutOfMemory,
+    TheHolyRogerException.INVALID_PARAMETER: InvalidParameter,
+    TheHolyRogerException.CLIENT_NOT_CONNECTED: NotConnected,
+    TheHolyRogerException.CLIENT_IN_INITIAL_DOWNLOAD: DownloadingBlocks,
+    TheHolyRogerException.WALLET_INSUFFICIENT_FUNDS: InsufficientFunds,
+    TheHolyRogerException.WALLET_INVALID_ACCOUNT_NAME: InvalidAccountName,
+    TheHolyRogerException.WALLET_KEYPOOL_RAN_OUT: KeypoolRanOut,
+    TheHolyRogerException.WALLET_UNLOCK_NEEDED: WalletUnlockNeeded,
+    TheHolyRogerException.WALLET_PASSPHRASE_INCORRECT: WalletPassphraseIncorrect,
+    TheHolyRogerException.WALLET_WRONG_ENC_STATE: WalletWrongEncState,
+    TheHolyRogerException.WALLET_ENCRYPTION_FAILED: WalletEncryptionFailed,
+    TheHolyRogerException.WALLET_ALREADY_UNLOCKED: WalletAlreadyUnlocked,
 }
 
 
 def _wrap_exception(error):
     """
-    Convert a JSON error object to a more specific Litecoin exception.
+    Convert a JSON error object to a more specificThe Holy Rogerexception.
     """
-    return _exception_map.get(error['code'], LitecoinException)(error)
+    return _exception_map.get(error['code'], TheHolyRogerException)(error)

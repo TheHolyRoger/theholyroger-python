@@ -18,7 +18,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 """
-Utilities for reading litecoin configuration files.
+Utilities for reading theholyroger configuration files.
 """
 
 
@@ -46,7 +46,7 @@ def read_config_file(filename):
 
 def read_default_config(filename=None):
     """
-    Read litecoin default configuration from the current user's home directory.
+    Read theholyroger default configuration from the current user's home directory.
 
     Arguments:
 
@@ -60,9 +60,9 @@ def read_default_config(filename=None):
             raise IOError("Home directory not defined, don't know where to look for config file")
 
         if platform.system() == "Darwin":
-            location = 'Library/Application Support/Litecoin/litecoin.conf'
+            location = 'Library/Application Support/TheHolyRoger/theholyroger.conf'
         else:
-            location = '.litecoin/litecoin.conf'
+            location = '.theholyroger/theholyroger.conf'
         filename = os.path.join(home, location)
 
     elif filename.startswith("~"):

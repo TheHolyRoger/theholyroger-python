@@ -18,14 +18,14 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 """
-Litecoin RPC service, data objects.
+The Holy Roger RPC service, data objects.
 """
-from litecoinrpc.util import DStruct
+from theholyrogerrpc.util import DStruct
 
 
 class ServerInfo(DStruct):
     """
-    Information object returned by :func:`~litecoinrpc.connection.LitecoinConnection.getinfo`.
+    Information object returned by :func:`~theholyrogerrpc.connection.TheHolyRogerConnection.getinfo`.
 
     - *errors* -- Number of errors.
 
@@ -43,7 +43,7 @@ class ServerInfo(DStruct):
 
     - *testnet* -- True if connected to testnet, False if on real network.
 
-    - *version* -- Litecoin client version.
+    - *version* --The Holy Rogerclient version.
 
     - *proxy* -- Proxy configured in client.
 
@@ -61,7 +61,7 @@ class ServerInfo(DStruct):
 
 class AccountInfo(DStruct):
     """
-    Information object returned by :func:`~litecoinrpc.connection.LitecoinConnection.listreceivedbyaccount`.
+    Information object returned by :func:`~theholyrogerrpc.connection.TheHolyRogerConnection.listreceivedbyaccount`.
 
     - *account* -- The account of the receiving address.
 
@@ -74,7 +74,7 @@ class AccountInfo(DStruct):
 
 class AddressInfo(DStruct):
     """
-    Information object returned by :func:`~litecoinrpc.connection.LitecoinConnection.listreceivedbyaddress`.
+    Information object returned by :func:`~theholyrogerrpc.connection.TheHolyRogerConnection.listreceivedbyaddress`.
 
     - *address* -- Receiving address.
 
@@ -89,11 +89,11 @@ class AddressInfo(DStruct):
 
 class TransactionInfo(DStruct):
     """
-    Information object returned by :func:`~litecoinrpc.connection.LitecoinConnection.listtransactions`.
+    Information object returned by :func:`~theholyrogerrpc.connection.TheHolyRogerConnection.listtransactions`.
 
     - *account* -- account name.
 
-    - *address* -- the address litecoins were sent to, or received from.
+    - *address* -- the address ROGERs were sent to, or received from.
     
     - *category* -- will be generate, send, receive, or move.
 
@@ -115,20 +115,20 @@ class TransactionInfo(DStruct):
 
 class AddressValidation(DStruct):
     """
-    Information object returned by :func:`~litecoinrpc.connection.LitecoinConnection.validateaddress`.
+    Information object returned by :func:`~theholyrogerrpc.connection.TheHolyRogerConnection.validateaddress`.
 
     - *isvalid* -- Validatity of address (:const:`True` or :const:`False`).
 
     - *ismine* -- :const:`True` if the address is in the server's wallet.
 
-    - *address* -- Litecoin address.
+    - *address* --The Holy Rogeraddress.
 
     """
 
 
 class WorkItem(DStruct):
     """
-    Information object returned by :func:`~litecoinrpc.connection.LitecoinConnection.getwork`.
+    Information object returned by :func:`~theholyrogerrpc.connection.TheHolyRogerConnection.getwork`.
 
     - *midstate* -- Precomputed hash state after hashing the first half of the data.
 
@@ -143,11 +143,11 @@ class WorkItem(DStruct):
 
 class MiningInfo(DStruct):
     """
-    Information object returned by :func:`~litecoinrpc.connection.LitecoinConnection.getmininginfo`.
+    Information object returned by :func:`~theholyrogerrpc.connection.TheHolyRogerConnection.getmininginfo`.
 
     - *blocks* -- Number of blocks.
 
-    - *currentblocksize* -- Size of current block.
+    - *currentblockweight* -- Weight of current block.
 
     - *currentblocktx* -- Number of transactions in current block.
 
@@ -161,8 +161,90 @@ class MiningInfo(DStruct):
 
     - *hashespersec* -- Number of hashes per second (if generation enabled).
 
+    - *networkhashps* -- Network hashes per second.
+
     - *pooledtx* -- Number of pooled transactions.
 
-    - *testnet* -- True if connected to testnet, False if on real network.
+    - *chain* -- Testnet or mainnet network.
+
+    - *warnings* -- Network warnings.
+
+    """
+
+
+class NetworkInfo(DStruct):
+    """
+    Information object returned by :func:`~theholyrogerrpc.connection.TheHolyRogerConnection.getnetworkinfo`.
+
+    - *version* -- the server version.
+
+    - *subversion* -- the server version.
+
+    - *protocolversion* -- the protocol version.
+
+    - *localservices* -- the services we offer to the network.
+
+    - *localrelay* -- true if transaction relay is requested from peers.
+
+    - *timeoffset* -- the time offset.
+
+    - *networkactive* -- whether p2p networking is enabled.
+
+    - *connections* -- the number of connections.
+
+    - *networks* -- information per network.
+
+    - *relayfee* -- minimum relay fee for transactions in ROGER/kB.
+
+    - *incrementalfee* -- minimum fee increment for mempool limiting or BIP 125 replacement in ROGER/kB.
+
+    - *localaddresses* -- list of local addresses.
+
+    - *errors* -- Number of errors.
+
+    - *warnings* -- Number of warnings.
+
+    """
+
+
+class BlockchainInfo(DStruct):
+    """
+    Information object returned by :func:`~theholyrogerrpc.connection.TheHolyRogerConnection.getblockchaininfo`.
+
+    - *chain* -- current network name as defined in BIP70 (main, test, regtest).
+
+    - *blocks* -- the current number of blocks processed in the server.
+
+    - *headers* -- the current number of headers we have validated.
+
+    - *bestblockhash* -- the hash of the currently best block.
+
+    - *difficulty* -- the current difficulty.
+
+    - *mediantime* -- median time for the current best block.
+
+    - *verificationprogress* -- estimate of verification progress [0..1].
+
+    - *initialblockdownload* -- estimate of whether this node is in Initial Block Download mode..
+
+    - *chainwork* -- total amount of work in active chain, in hexadecimal.
+
+    - *size_on_disk* -- the estimated size of the block and undo files on disk.
+
+    - *pruned* -- if the blocks are subject to pruning.
+
+    - *pruneheight* -- lowest-height complete block stored (only present if pruning is enabled).
+
+    - *automatic_pruning* -- whether automatic pruning is enabled (only present if pruning is enabled).
+
+    - *prune_target_size* -- the target size used by pruning (only present if automatic pruning is enabled).
+
+    - *softforks* -- status of softforks in progress.
+
+    - *bip9_softforks* -- status of BIP9 softforks in progress.
+
+    - *errors* -- Number of errors.
+
+    - *warnings* -- Number of warnings.
 
     """

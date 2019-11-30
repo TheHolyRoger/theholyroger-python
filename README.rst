@@ -1,18 +1,36 @@
-DO NOT USE
-==========
+theholyroger-python is a set of Python libraries that allows easy access to the
+theholyroger peer-to-peer cryptocurrency client API.
 
-Please do not use this software. This repository is kept for historical
-purposes, since some people have used it in the past. It was created from a
-simple find and replace on the `bitcoin-python` repository in mid-2013 and has
-never really been maintained.
+Documentation
+===========================
 
-At this point, I am sure there is a mainstream litecoin/python integration
-floating around out there. Please figure out what that is, and use it instead.
+Documentation can be found here, or in the source archive. It is built
+using Sphinx:
 
-Once again, **no one should be using this library**. Please stop and find
-something else.
+http://deseret-tech.github.com/litecoin-python/doc/
 
------
+Installation instructions
+===========================
 
-litecoin-python is a set of Python libraries that allows easy access to the
-litecoin peer-to-peer cryptocurrency client API.
+theholyroger-python uses setuptools for the install script. There are no dependencies apart from Python itself.
+
+::
+
+  $ python setup.py build
+  $ python setup.py install
+
+Pypi / Cheeseshop
+==================
+
+It is possible to install the package through Pypi (cheeseshop), see http://pypi.python.org/pypi?:action=display&name=theholyroger-python
+
+::
+
+  $ pip install theholyroger-python
+
+TODO
+======
+These things still have to be added:
+
+- SSL support (including certificate verification) for managing remote theholyroger daemons.
+

@@ -1,7 +1,7 @@
-:mod:`litecoinrpc.data` --- Litecoin RPC service, data objects
+:mod:`theholyrogerrpc.data` ---The Holy RogerRPC service, data objects
 ====================================================================================
 
-.. automodule:: litecoinrpc.data
+.. automodule:: theholyrogerrpc.data
    :members:
    :show-inheritance:
    

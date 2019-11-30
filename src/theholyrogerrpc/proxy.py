@@ -31,7 +31,7 @@ try:
 except ImportError:
     import urlparse
 from collections import defaultdict, deque
-from litecoinrpc.exceptions import TransportException
+from theholyrogerrpc.exceptions import TransportException
 
 USER_AGENT = "AuthServiceProxy/0.1"
 
@@ -58,11 +58,14 @@ class HTTPTransport(object):
         self.auth_header = "Basic ".encode('utf8') + base64.b64encode(authpair)
         if self.parsed_url.scheme == 'https':
             self.connection = httplib.HTTPSConnection(self.parsed_url.hostname,
-                                                      port, None, None, False,
-                                                      HTTP_TIMEOUT)
+                                                      port = int(port),
+                                                      key_file = None,
+                                                      cert_file = None,
+                                                      timeout = HTTP_TIMEOUT)
         else:
             self.connection = httplib.HTTPConnection(self.parsed_url.hostname,
-                                                     port, False, HTTP_TIMEOUT)
+                                                     port = int(port),
+                                                     timeout = HTTP_TIMEOUT)
 
     def request(self, serialized_data):
         self.connection.request('POST', self.parsed_url.path, serialized_data,
@@ -76,7 +79,7 @@ class HTTPTransport(object):
             raise JSONRPCException({
                 'code': -342, 'message': 'missing HTTP response from server'})
         elif httpresp.status == httplib.FORBIDDEN:
-            msg = "litecoind returns 403 Forbidden. Is your IP allowed?"
+            msg = "theholyrogerd returns 403 Forbidden. Is your IP allowed?"
             raise TransportException(msg, code = 403, protocol = "HTTP", raw_detail = httpresp)
 
         resp = httpresp.read()
@@ -115,6 +118,13 @@ class RPCMethod(object):
                 'method': self._method_name,
                 'params': args,
                 'id': self._service_proxy._id_counter}
+        newparams = []
+        for arg in data['params']:
+          try:
+            newparams.append(arg.decode())
+          except AttributeError:
+            newparams.append(arg)
+        data['params'] = newparams
         postdata = json.dumps(data)
         resp = self._service_proxy._transport.request(postdata)
         resp = json.loads(resp, parse_float=decimal.Decimal)

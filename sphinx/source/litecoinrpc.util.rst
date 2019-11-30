@@ -1,7 +1,7 @@
-:mod:`litecoinrpc.util` --- Generic utilities used by litecoin client library
+:mod:`theholyrogerrpc.util` --- Generic utilities used by theholyroger client library
 ====================================================================================
 
-.. automodule:: litecoinrpc.util
+.. automodule:: theholyrogerrpc.util
    :members:
    :show-inheritance:
    

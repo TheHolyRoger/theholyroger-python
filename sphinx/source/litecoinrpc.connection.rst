@@ -1,7 +1,7 @@
-:mod:`litecoinrpc.connection` --- Connect to Litecoin server via JSON-RPC
+:mod:`theholyrogerrpc.connection` --- Connect toThe Holy Rogerserver via JSON-RPC
 ====================================================================================
 
-.. automodule:: litecoinrpc.connection
+.. automodule:: theholyrogerrpc.connection
    :members:
    :show-inheritance:
 

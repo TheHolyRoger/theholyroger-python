@@ -18,37 +18,38 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 """
-litecoin-python - Easy-to-use Litecoin API client
+theholyroger-python - Easy-to-useThe Holy RogerAPI client
 """
 
 
 def connect_to_local(filename=None):
     """
-    Connect to default litecoin instance owned by this user, on this machine.
+    Connect to default theholyroger instance owned by this user, on this machine.
 
-    Returns a :class:`~litecoinrpc.connection.LitecoinConnection` object.
+    Returns a :class:`~theholyrogerrpc.connection.TheHolyRogerConnection` object.
 
     Arguments:
 
         - `filename`: Path to a configuration file in a non-standard location (optional)
     """
-    from litecoinrpc.connection import LitecoinConnection
-    from litecoinrpc.config import read_default_config
+    from theholyrogerrpc.connection import TheHolyRogerConnection
+    from theholyrogerrpc.config import read_default_config
 
     cfg = read_default_config(filename)
-    port = int(cfg.get('rpcport', '18332' if cfg.get('testnet') else '8332'))
+    port = int(cfg.get('rpcport', 9772 if cfg.get('testnet') else 9662))
     rcpuser = cfg.get('rpcuser', '')
+    rpcpassword = cfg.get('rpcpassword', '')
 
-    return LitecoinConnection(rcpuser, cfg['rpcpassword'], 'localhost', port)
+    return TheHolyRogerConnection(rcpuser, rpcpassword, 'localhost', port)
 
 
-def connect_to_remote(user, password, host='localhost', port=8332,
+def connect_to_remote(user, password, host='localhost', port=9662,
                       use_https=False):
     """
-    Connect to remote or alternative local litecoin client instance.
+    Connect to remote or alternative local theholyroger client instance.
 
-    Returns a :class:`~litecoinrpc.connection.LitecoinConnection` object.
+    Returns a :class:`~theholyrogerrpc.connection.TheHolyRogerConnection` object.
     """
-    from litecoinrpc.connection import LitecoinConnection
+    from theholyrogerrpc.connection import TheHolyRogerConnection
 
-    return LitecoinConnection(user, password, host, port, use_https)
+    return TheHolyRogerConnection(user, password, host, port, use_https)

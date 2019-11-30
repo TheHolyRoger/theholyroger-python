@@ -1,7 +1,7 @@
-:mod:`litecoinrpc.exceptions` --- Exception definitions
+:mod:`theholyrogerrpc.exceptions` --- Exception definitions
 ====================================================================================
 
-.. automodule:: litecoinrpc.exceptions
+.. automodule:: theholyrogerrpc.exceptions
    :members:
    :show-inheritance:
       

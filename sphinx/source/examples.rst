@@ -2,25 +2,25 @@
   Examples
 ****************************
 
-A basic program that uses ``python-litecoin`` looks like this:
+A basic program that uses ``theholyroger-python`` looks like this:
 
 First, import the library and exceptions.
 
 ::
 
-    import litecoinrpc
-    from litecoinrpc.exceptions import InsufficientFunds
+    import theholyrogerrpc
+    from theholyrogerrpc.exceptions import InsufficientFunds
 
-Then, we connect to the currently running ``litecoin`` instance of the current user on the local machine
+Then, we connect to the currently running ``theholyroger`` instance of the current user on the local machine
 with one call to
-:func:`~litecoinrpc.connect_to_local`. This returns a :class:`~litecoinrpc.connection.LitecoinConnection` objects:
+:func:`~theholyrogerrpc.connect_to_local`. This returns a :class:`~theholyrogerrpc.connection.TheHolyRogerConnection` objects:
 
 ::
 
-    conn = litecoinrpc.connect_to_local()
+    conn = theholyrogerrpc.connect_to_local()
 
-Try to move one litecoin from account ``testaccount`` to account ``testaccount2`` using 
-:func:`~litecoinrpc.connection.LitecoinConnection.move`. Catch the :class:`~litecoinrpc.exceptions.InsufficientFunds`
+Try to move one from account ``testaccount`` to account ``testaccount2`` using 
+:func:`~theholyrogerrpc.connection.TheHolyRogerConnection.move`. Catch the :class:`~theholyrogerrpc.exceptions.InsufficientFunds`
 exception in the case the originating account is broke:
 
 ::  
@@ -31,7 +31,7 @@ exception in the case the originating account is broke:
         print "Account does not have enough funds available!"
 
 
-Retrieve general server information with :func:`~litecoinrpc.connection.LitecoinConnection.getinfo` and print some statistics:
+Retrieve general server information with :func:`~theholyrogerrpc.connection.TheHolyRogerConnection.getinfo` and print some statistics:
 
 ::
 

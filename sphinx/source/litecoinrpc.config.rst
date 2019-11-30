@@ -1,7 +1,7 @@
-:mod:`litecoinrpc.config` --- Utilities for reading litecoin configuration files
+:mod:`theholyrogerrpc.config` --- Utilities for reading theholyroger configuration files
 ====================================================================================
 
-.. automodule:: litecoinrpc.config
+.. automodule:: theholyrogerrpc.config
    :members:
    :show-inheritance:
    

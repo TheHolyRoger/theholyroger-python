@@ -2,5 +2,11 @@
 *~
 sphinx/build
 build
+build1
+build2
 dist
+files.txt
 src/bitcoin_python.egg-info
+src/theholyroger_python\.egg-info/
+
+\.DS_Store

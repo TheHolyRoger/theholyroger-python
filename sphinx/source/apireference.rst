@@ -5,9 +5,9 @@
 .. toctree::
    :maxdepth: 2
 
-   litecoinrpc.rst
-   litecoinrpc.connection.rst
-   litecoinrpc.exceptions.rst
-   litecoinrpc.data.rst
-   litecoinrpc.config.rst
+   theholyrogerrpc.rst
+   theholyrogerrpc.connection.rst
+   theholyrogerrpc.exceptions.rst
+   theholyrogerrpc.data.rst
+   theholyrogerrpc.config.rst
 

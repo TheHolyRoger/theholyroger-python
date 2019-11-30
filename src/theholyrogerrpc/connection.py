@@ -18,17 +18,18 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 """
-Connect to Litecoin server via JSON-RPC.
+Connect toThe Holy Rogerserver via JSON-RPC.
 """
-from litecoinrpc.proxy import JSONRPCException, AuthServiceProxy
-from litecoinrpc.exceptions import _wrap_exception, WalletPassphraseIncorrect, WalletAlreadyUnlocked
-from litecoinrpc.data import (ServerInfo, AccountInfo, AddressInfo, TransactionInfo,
-                             AddressValidation, WorkItem, MiningInfo)
+import time
+from theholyrogerrpc.proxy import JSONRPCException, AuthServiceProxy
+from theholyrogerrpc.exceptions import _wrap_exception, WalletPassphraseIncorrect, WalletAlreadyUnlocked
+from theholyrogerrpc.data import (ServerInfo, AccountInfo, AddressInfo, TransactionInfo,
+                             AddressValidation, WorkItem, MiningInfo, NetworkInfo, BlockchainInfo)
 
 
-class LitecoinConnection(object):
+class TheHolyRogerConnection(object):
     """
-    A LitecoinConnection object defines a connection to a litecoin server.
+    A TheHolyRogerConnection object defines a connection to a theholyroger server.
     It is a thin wrapper around a JSON-RPC API connection.
 
     Up-to-date for SVN revision 198.
@@ -37,13 +38,13 @@ class LitecoinConnection(object):
 
     - *user* -- Authenticate as user.
     - *password* -- Authentication password.
-    - *host* -- Litecoin JSON-RPC host.
-    - *port* -- Litecoin JSON-RPC port.
+    - *host* --The Holy RogerJSON-RPC host.
+    - *port* --The Holy RogerJSON-RPC port.
     """
-    def __init__(self, user, password, host='localhost', port=8332,
+    def __init__(self, user, password, host='localhost', port=9662,
                  use_https=False):
         """
-        Create a new litecoin server connection.
+        Create a new theholyroger server connection.
         """
         url = 'http{s}://{user}:{password}@{host}:{port}/'.format(
             s='s' if use_https else '',
@@ -56,7 +57,7 @@ class LitecoinConnection(object):
 
     def stop(self):
         """
-        Stop litecoin server.
+        Stop theholyroger server.
         """
         try:
             self.proxy.stop()
@@ -156,7 +157,7 @@ class LitecoinConnection(object):
 
     def getinfo(self):
         """
-        Returns an :class:`~litecoinrpc.data.ServerInfo` object containing various state info.
+        Returns an :class:`~theholyrogerrpc.data.ServerInfo` object containing various state info.
         """
         try:
             return ServerInfo(**self.proxy.getinfo())
@@ -165,7 +166,7 @@ class LitecoinConnection(object):
 
     def getmininginfo(self):
         """
-        Returns an :class:`~litecoinrpc.data.MiningInfo` object containing various
+        Returns an :class:`~theholyrogerrpc.data.MiningInfo` object containing various
         mining state info.
         """
         try:
@@ -173,9 +174,29 @@ class LitecoinConnection(object):
         except JSONRPCException as e:
             raise _wrap_exception(e.error)
 
+    def getnetworkinfo(self):
+        """
+        Returns an :class:`~theholyrogerrpc.data.NetworkInfo` object containing various
+        network state info.
+        """
+        try:
+            return NetworkInfo(**self.proxy.getnetworkinfo())
+        except JSONRPCException as e:
+            raise _wrap_exception(e.error)
+
+    def getblockchaininfo(self):
+        """
+        Returns an :class:`~theholyrogerrpc.data.BlockchainInfo` object containing various
+        blockchain state info.
+        """
+        try:
+            return BlockchainInfo(**self.proxy.getblockchaininfo())
+        except JSONRPCException as e:
+            raise _wrap_exception(e.error)
+
     def getnewaddress(self, account=None):
         """
-        Returns a new litecoin address for receiving payments.
+        Returns a new ROGER address for receiving payments.
 
         Arguments:
 
@@ -193,7 +214,7 @@ class LitecoinConnection(object):
 
     def getaccountaddress(self, account):
         """
-        Returns the current litecoin address for receiving payments to an account.
+        Returns the current ROGER address for receiving payments to an account.
 
         Arguments:
 
@@ -205,31 +226,31 @@ class LitecoinConnection(object):
         except JSONRPCException as e:
             raise _wrap_exception(e.error)
 
-    def setaccount(self, litecoinaddress, account):
+    def setaccount(self, theholyrogeraddress, account):
         """
         Sets the account associated with the given address.
 
         Arguments:
 
-        - *litecoinaddress* -- Litecoin address to associate.
+        - *theholyrogeraddress* --The Holy Rogeraddress to associate.
         - *account* -- Account to associate the address to.
 
         """
         try:
-            return self.proxy.setaccount(litecoinaddress, account)
+            return self.proxy.setaccount(theholyrogeraddress, account)
         except JSONRPCException as e:
             raise _wrap_exception(e.error)
 
-    def getaccount(self, litecoinaddress):
+    def getaccount(self, theholyrogeraddress):
         """
         Returns the account associated with the given address.
 
         Arguments:
 
-        - *litecoinaddress* -- Litecoin address to get account for.
+        - *theholyrogeraddress* --The Holy Rogeraddress to get account for.
         """
         try:
-            return self.proxy.getaccount(litecoinaddress)
+            return self.proxy.getaccount(theholyrogeraddress)
         except JSONRPCException as e:
             raise _wrap_exception(e.error)
 
@@ -246,13 +267,13 @@ class LitecoinConnection(object):
         except JSONRPCException as e:
             raise _wrap_exception(e.error)
 
-    def sendtoaddress(self, litecoinaddress, amount, comment=None, comment_to=None):
+    def sendtoaddress(self, theholyrogeraddress, amount, comment=None, comment_to=None):
         """
-        Sends *amount* from the server's available balance to *litecoinaddress*.
+        Sends *amount* from the server's available balance to *theholyrogeraddress*.
 
         Arguments:
 
-        - *litecoinaddress* -- Litecoin address to send to.
+        - *theholyrogeraddress* --The Holy Rogeraddress to send to.
         - *amount* -- Amount to send (float, rounded to the nearest 0.01).
         - *minconf* -- Minimum number of confirmations required for transferred balance.
         - *comment* -- Comment for transaction.
@@ -261,27 +282,27 @@ class LitecoinConnection(object):
         """
         try:
             if comment is None:
-                return self.proxy.sendtoaddress(litecoinaddress, amount)
+                return self.proxy.sendtoaddress(theholyrogeraddress, amount)
             elif comment_to is None:
-                return self.proxy.sendtoaddress(litecoinaddress, amount, comment)
+                return self.proxy.sendtoaddress(theholyrogeraddress, amount, comment)
             else:
-                return self.proxy.sendtoaddress(litecoinaddress, amount, comment, comment_to)
+                return self.proxy.sendtoaddress(theholyrogeraddress, amount, comment, comment_to)
         except JSONRPCException as e:
             raise _wrap_exception(e.error)
 
-    def getreceivedbyaddress(self, litecoinaddress, minconf=1):
+    def getreceivedbyaddress(self, theholyrogeraddress, minconf=1):
         """
-        Returns the total amount received by a litecoin address in transactions with at least a
+        Returns the total amount received by a ROGER address in transactions with at least a
         certain number of confirmations.
 
         Arguments:
 
-        - *litecoinaddress* -- Address to query for total amount.
+        - *theholyrogeraddress* -- Address to query for total amount.
 
         - *minconf* -- Number of confirmations to require, defaults to 1.
         """
         try:
-            return self.proxy.getreceivedbyaddress(litecoinaddress, minconf)
+            return self.proxy.getreceivedbyaddress(theholyrogeraddress, minconf)
         except JSONRPCException as e:
             raise _wrap_exception(e.error)
 
@@ -409,19 +430,22 @@ class LitecoinConnection(object):
         except JSONRPCException as e:
             raise _wrap_exception(e.error)
 
-    def listsinceblock(self, block_hash):
+    def listsinceblock(self, block_hash, minconf=1):
         try:
-            res = self.proxy.listsinceblock(block_hash)
+            res = self.proxy.listsinceblock(block_hash, minconf)
             res['transactions'] = [TransactionInfo(**x) for x in res['transactions']]
+            res['time'] = time.time()
             return res
         except JSONRPCException as e:
-            raise _wrap_exception(e.error)
+            pass
+        except:
+            pass
 
     def listreceivedbyaddress(self, minconf=1, includeempty=False):
         """
         Returns a list of addresses.
 
-        Each address is represented with a :class:`~litecoinrpc.data.AddressInfo` object.
+        Each address is represented with a :class:`~theholyrogerrpc.data.AddressInfo` object.
 
         Arguments:
 
@@ -456,7 +480,7 @@ class LitecoinConnection(object):
         """
         Returns a list of accounts.
 
-        Each account is represented with a :class:`~litecoinrpc.data.AccountInfo` object.
+        Each account is represented with a :class:`~theholyrogerrpc.data.AccountInfo` object.
 
         Arguments:
 
@@ -474,7 +498,7 @@ class LitecoinConnection(object):
         """
         Returns a list of the last transactions for an account.
 
-        Each transaction is represented with a :class:`~litecoinrpc.data.TransactionInfo` object.
+        Each transaction is represented with a :class:`~theholyrogerrpc.data.TransactionInfo` object.
 
         Arguments:
 
@@ -484,7 +508,7 @@ class LitecoinConnection(object):
         - *from_* -- Skip the first <from_> transactions.
         - *address* -- Receive address to consider
         """
-        accounts = [account] if account is not None else self.listaccounts(as_dict=True).iterkeys()
+        accounts = [account] if account is not None else self.listaccounts(as_dict=True).keys()
         try:
             return [TransactionInfo(**tx) for acc in accounts for
                     tx in self.proxy.listtransactions(acc, count, from_) if
@@ -508,9 +532,9 @@ class LitecoinConnection(object):
 
     def validateaddress(self, validateaddress):
         """
-        Validate a litecoin address and return information for it.
+        Validate a ROGER address and return information for it.
 
-        The information is represented by a :class:`~litecoinrpc.data.AddressValidation` object.
+        The information is represented by a :class:`~theholyrogerrpc.data.AddressValidation` object.
 
         Arguments: -- Address to validate.
 
@@ -541,6 +565,20 @@ class LitecoinConnection(object):
         except JSONRPCException as e:
             raise _wrap_exception(e.error)
 
+    def settxfee(self, txfee):
+        """
+        Set TX fee.
+
+        Arguments:
+
+        - *txfee* -- txfee.
+
+        """
+        try:
+            return self.proxy.settxfee(txfee)
+        except JSONRPCException as e:
+            raise _wrap_exception(e.error)
+
     def move(self, fromaccount, toaccount, amount, minconf=1, comment=None):
         """
         Move from one account in your wallet to another.
@@ -562,18 +600,18 @@ class LitecoinConnection(object):
         except JSONRPCException as e:
             raise _wrap_exception(e.error)
 
-    def sendfrom(self, fromaccount, tolitecoinaddress, amount, minconf=1, comment=None,
+    def sendfrom(self, fromaccount, totheholyrogeraddress, amount, minconf=1, comment=None,
                  comment_to=None):
         """
-        Sends amount from account's balance to litecoinaddress. This method will fail
-        if there is less than amount litecoins with minconf confirmations in the account's
+        Sends amount from account's balance to theholyrogeraddress. This method will fail
+        if there is less than amount ROGERs with minconf confirmations in the account's
         balance (unless account is the empty-string-named default account; it
         behaves like the sendtoaddress method). Returns transaction ID on success.
 
         Arguments:
 
         - *fromaccount* -- Account to send from.
-        - *tolitecoinaddress* -- Litecoin address to send to.
+        - *totheholyrogeraddress* --The Holy Rogeraddress to send to.
         - *amount* -- Amount to send (float, rounded to the nearest 0.01).
         - *minconf* -- Minimum number of confirmations required for transferred balance.
         - *comment* -- Comment for transaction.
@@ -582,26 +620,26 @@ class LitecoinConnection(object):
         """
         try:
             if comment is None:
-                return self.proxy.sendfrom(fromaccount, tolitecoinaddress, amount, minconf)
+                return self.proxy.sendfrom(fromaccount, totheholyrogeraddress, amount, minconf)
             elif comment_to is None:
-                return self.proxy.sendfrom(fromaccount, tolitecoinaddress, amount, minconf, comment)
+                return self.proxy.sendfrom(fromaccount, totheholyrogeraddress, amount, minconf, comment)
             else:
-                return self.proxy.sendfrom(fromaccount, tolitecoinaddress, amount, minconf,
+                return self.proxy.sendfrom(fromaccount, totheholyrogeraddress, amount, minconf,
                                            comment, comment_to)
         except JSONRPCException as e:
             raise _wrap_exception(e.error)
 
     def sendmany(self, fromaccount, todict, minconf=1, comment=None):
         """
-        Sends specified amounts from account's balance to litecoinaddresses. This method will fail
-        if there is less than total amount litecoins with minconf confirmations in the account's
+        Sends specified amounts from account's balance to theholyrogeraddresses. This method will fail
+        if there is less than total amount ROGERs with minconf confirmations in the account's
         balance (unless account is the empty-string-named default account; Returns transaction ID
         on success.
 
         Arguments:
 
         - *fromaccount* -- Account to send from.
-        - *todict* -- Dictionary with Litecoin addresses as keys and amounts as values.
+        - *todict* -- Dictionary withThe Holy Rogeraddresses as keys and amounts as values.
         - *minconf* -- Minimum number of confirmations required for transferred balance.
         - *comment* -- Comment for transaction.
 
@@ -614,21 +652,21 @@ class LitecoinConnection(object):
         except JSONRPCException as e:
             raise _wrap_exception(e.error)
 
-    def verifymessage(self, litecoinaddress, signature, message):
+    def verifymessage(self, theholyrogeraddress, signature, message):
         """
-        Verifies a signature given the litecoinaddress used to sign,
+        Verifies a signature given the theholyrogeraddress used to sign,
         the signature itself, and the message that was signed.
         Returns :const:`True` if the signature is valid, and :const:`False` if it is invalid.
 
         Arguments:
 
-        - *litecoinaddress* -- the litecoinaddress used to sign the message
+        - *theholyrogeraddress* -- the theholyrogeraddress used to sign the message
         - *signature* -- the signature to be verified
         - *message* -- the message that was originally signed
 
         """
         try:
-            return self.proxy.verifymessage(litecoinaddress, signature, message)
+            return self.proxy.verifymessage(theholyrogeraddress, signature, message)
         except JSONRPCException as e:
             raise _wrap_exception(e.error)
 
@@ -637,7 +675,7 @@ class LitecoinConnection(object):
         Get work for remote mining, or submit result.
         If data is specified, the server tries to solve the block
         using the provided data and returns :const:`True` if it was successful.
-        If not, the function returns formatted hash data (:class:`~litecoinrpc.data.WorkItem`)
+        If not, the function returns formatted hash data (:class:`~theholyrogerrpc.data.WorkItem`)
         to work on.
 
         Arguments:
@@ -688,7 +726,7 @@ class LitecoinConnection(object):
         - *timeout* -- Time in seconds to keep the wallet unlocked
                        (by keeping the passphrase in memory).
 
-        - *dont_raise* -- instead of raising `~litecoinrpc.exceptions.WalletPassphraseIncorrect`
+        - *dont_raise* -- instead of raising `~theholyrogerrpc.exceptions.WalletPassphraseIncorrect`
                           return False.
         """
         try:
@@ -721,7 +759,7 @@ class LitecoinConnection(object):
 
         Arguments:
 
-        - *dont_raise* -- instead of raising `~litecoinrpc.exceptions.WalletPassphraseIncorrect`
+        - *dont_raise* -- instead of raising `~theholyrogerrpc.exceptions.WalletPassphraseIncorrect`
                           return False.
         """
         try:

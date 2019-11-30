@@ -1,8 +1,8 @@
 ==================================================
- litecoin-python - Easy-to-use Litecoin API client.
+ theholyroger-python - Easy-to-useThe Holy RogerAPI client.
 ==================================================
 
-``litecoin-python`` is a set of Python libraries that allows easy access to the
+``theholyroger-python`` is a set of Python libraries that allows easy access to the
 litecoin_ peer-to-peer cryptocurrency client API.
 
 Contents:

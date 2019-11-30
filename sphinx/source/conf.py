@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# litecoin-python documentation build configuration file, created by
+# theholyroger-python documentation build configuration file, created by
 # sphinx-quickstart on Fri Dec 10 21:45:49 2010.
 #
 # This file is execfile()d with the current directory set to its containing dir.
@@ -37,8 +37,8 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'litecoin-python'
-copyright = u'2013, litecoin-python developers'
+project = u'theholyroger-python'
+copyright = u'2013, theholyroger-python developers'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -159,7 +159,7 @@ html_static_path = ['_static']
 #html_file_suffix = ''
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'litecoin-pythondoc'
+htmlhelp_basename = 'theholyroger-pythondoc'
 
 
 # -- Options for LaTeX output --------------------------------------------------
@@ -173,7 +173,7 @@ htmlhelp_basename = 'litecoin-pythondoc'
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-  ('index', 'litecoin-python.tex', u'litecoin-python Documentation',
+  ('index', 'theholyroger-python.tex', u'theholyroger-python Documentation',
    u'Witchspace', 'manual'),
 ]
 
