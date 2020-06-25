@@ -710,6 +710,44 @@ class TheHolyRogerConnection(object):
         except JSONRPCException as e:
             raise _wrap_exception(e.error)
     
+    def estimaterawfee(self, conftarget=6, threshold=None):
+        """
+        Estimates the approximate fee per kilobyte needed for a transaction to begin
+        confirmation within conf_target blocks if possible.
+
+        Arguments:
+
+        - *conftarget* --  Confirmation target in blocks (1 - 1008)
+
+
+        """
+        try:
+            if threshold is None:
+                return self.proxy.estimaterawfee(conftarget)
+            else:
+                return self.proxy.estimaterawfee(conftarget, threshold)
+        except JSONRPCException as e:
+            raise _wrap_exception(e.error)
+    
+    def estimatesmartfee(self, conftarget=6, threshold=None):
+        """
+        Estimates the approximate fee per kilobyte needed for a transaction to begin
+        confirmation within conf_target blocks if possible.
+
+        Arguments:
+
+        - *conftarget* --  Confirmation target in blocks (1 - 1008)
+
+
+        """
+        try:
+            if threshold is None:
+                return self.proxy.estimatesmartfee(conftarget)
+            else:
+                return self.proxy.estimatesmartfee(conftarget, threshold)
+        except JSONRPCException as e:
+            raise _wrap_exception(e.error)
+    
     def keypoolrefill(self):
         "Fills the keypool, requires wallet passphrase to be set."
         try:
